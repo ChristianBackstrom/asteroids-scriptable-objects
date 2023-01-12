@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-
 	private const float Randomness = .5f;
 
 	public void AddForce(float speed)

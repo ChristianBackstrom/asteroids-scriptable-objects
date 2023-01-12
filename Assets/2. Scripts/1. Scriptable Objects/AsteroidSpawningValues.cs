@@ -9,14 +9,24 @@ public class AsteroidSpawningValues : ScriptableObject
 
 	public float SpawningDistance;
 
+
+	[Space(20)]
+
 	public int GenerationSteps;
 
 	public float GenerationRandomness;
 
+	[Space]
 	[HideInInspector] public float MinSpawnSize;
+
+	[Space]
 	[HideInInspector] public float MaxSpawnSize;
 
+
+	[Space]
 	[HideInInspector] public float MinFlightSpeed;
+
+	[Space]
 	[HideInInspector] public float MaxFlightSpeed;
 
 

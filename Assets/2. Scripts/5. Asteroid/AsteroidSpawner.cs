@@ -9,7 +9,7 @@ public class AsteroidSpawner : MonoBehaviour
 	[SerializeField] private Asteroid _asteroidPrefab;
 
 	private float timer = 0;
-	private Vector2 spawnPosition = Vector2.zero;
+	private Vector2 LastPosition = Vector2.zero;
 
 	private void Update()
 	{
@@ -27,9 +27,20 @@ public class AsteroidSpawner : MonoBehaviour
 			print("Asteroid Prefab not assigned");
 			return;
 		}
+		Vector2 spawnPosition = LastPosition;
 
+		int iteration = 0;
 
-		spawnPosition = Random.insideUnitCircle.normalized * _spawningValues.SpawningDistance;
+		while (Vector2.Distance(LastPosition, spawnPosition) < _spawningValues.MaxSpawnSize)
+		{
+			iteration++;
+			spawnPosition = Random.insideUnitCircle.normalized * _spawningValues.SpawningDistance;
+		}
+
+		LastPosition = spawnPosition;
+
+		print(iteration);
+
 
 		float speed = Random.Range(_spawningValues.MinFlightSpeed, _spawningValues.MaxFlightSpeed);
 		float scale = Random.Range(_spawningValues.MinSpawnSize, _spawningValues.MaxSpawnSize);
@@ -49,10 +60,5 @@ public class AsteroidSpawner : MonoBehaviour
 
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere(Vector3.zero, _spawningValues.SpawningDistance);
-
-
-		Gizmos.color = Color.blue;
-
-		Gizmos.DrawSphere(spawnPosition, .5f);
 	}
 }
