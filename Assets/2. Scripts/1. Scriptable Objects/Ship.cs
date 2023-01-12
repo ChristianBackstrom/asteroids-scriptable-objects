@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Asteroird-Destroyer/Ship")]
+[CreateAssetMenu(fileName = "ShipValues", menuName = "Asteroird-Destroyer/Ship")]
 public class Ship : ScriptableObject
 {
 	public int MaxHealth;
