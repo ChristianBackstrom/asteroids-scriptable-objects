@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+[CreateAssetMenu(menuName = "Asteroird-Destroyer/Ship")]
+public class Ship : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public int MaxHealth;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public float RotationSpeed;
+
+	public float ThrustSpeed;
+
+	[Range(0, 1)]
+	public float ShootCooldown;
+
+
+	private void OnValidate()
+	{
+		MaxHealth = MaxHealth < 0 ? 0 : MaxHealth;
+		RotationSpeed = RotationSpeed < 0 ? 0 : RotationSpeed;
+		ThrustSpeed = ThrustSpeed < 0 ? 0 : ThrustSpeed;
+	}
 }
