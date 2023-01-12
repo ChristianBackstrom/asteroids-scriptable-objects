@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ship
   m_EditorClassIdentifier: 
   MaxHealth: 5
-  RotationSpeed: 120
-  ThrustSpeed: 0.5
+  RotationSpeed: 220
+  ThrustSpeed: 1
   ShootCooldown: 0.091
-  BulletSpeed: 0.6
+  BulletSpeed: 15
   FirePoint: 0.6

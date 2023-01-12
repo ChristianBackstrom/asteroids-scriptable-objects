@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aecc488af53b534bade7573c4a9ac3e, type: 3}
   m_Name: AsteroidSpawningValues
   m_EditorClassIdentifier: 
-  SpawnRate: 0
-  MinSpawnSize: 0
-  MaxSpawnSize: 0
-  MinFlightSpeed: 0
-  MaxFlightSpeed: 0
+  SpawnRate: 1
+  SpawningDistance: 15
+  GenerationSteps: 8
+  GenerationRandomness: 0.2
+  MinSpawnSize: 0.7
+  MaxSpawnSize: 2
+  MinFlightSpeed: 1.2
+  MaxFlightSpeed: 2
