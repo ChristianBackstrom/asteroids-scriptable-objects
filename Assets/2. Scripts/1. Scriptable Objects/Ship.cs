@@ -14,6 +14,10 @@ public class Ship : ScriptableObject
 	[Range(0, 1)]
 	public float ShootCooldown;
 
+	public float BulletSpeed;
+
+	public float FirePoint;
+
 
 	private void OnValidate()
 	{
