@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 5
   RotationSpeed: 220
-  ThrustSpeed: 1
+  ThrustSpeed: 2
   ShootCooldown: 0.091
   BulletSpeed: 15
   FirePoint: 0.6

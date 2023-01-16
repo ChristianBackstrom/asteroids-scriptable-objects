@@ -10,9 +10,12 @@ public class Movement : MonoBehaviour
 
 	[SerializeField] private Rigidbody2D _rb;
 
+	private ParticleSystem _particleSystem;
+
 	private void Awake()
 	{
 		_rb = GetComponent<Rigidbody2D>();
+		_particleSystem = GetComponentInChildren<ParticleSystem>();
 	}
 
 
@@ -23,6 +26,8 @@ public class Movement : MonoBehaviour
 		ApplyRotation(_input.x);
 
 		ApplyThrust(_input.y);
+
+		ApplyParticles(_input.y);
 	}
 
 	private void FixedUpdate()
@@ -45,5 +50,17 @@ public class Movement : MonoBehaviour
 		_input = InputHandler.Instance.MoveInputs;
 
 		if (_input.y < 0) _input.y = 0;
+	}
+
+	private void ApplyParticles(float thrust)
+	{
+		ParticleSystem.MainModule main = _particleSystem.main;
+		if (thrust > 0)
+		{
+			_particleSystem.Play();
+			return;
+		}
+
+		_particleSystem.Stop();
 	}
 }

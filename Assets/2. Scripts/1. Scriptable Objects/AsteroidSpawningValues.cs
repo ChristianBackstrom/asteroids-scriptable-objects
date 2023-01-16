@@ -5,16 +5,30 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "AsteroidSpawningValues", menuName = "Asteroird-Destroyer/AsteroidSpawningValues", order = 0)]
 public class AsteroidSpawningValues : ScriptableObject
 {
-	public float SpawnRate;
-
-	public float SpawningDistance;
+	public float TimeBetweenSpawn;
 
 
 	[Space(20)]
 
-	public int GenerationSteps;
+	public float AsteroidCornerRandomness;
 
-	public float GenerationRandomness;
+
+	[Space(20)]
+	[HideInInspector] public float MinSpawningDistance;
+
+	[Space(20)]
+	[HideInInspector] public float MaxSpawningDistance;
+
+
+
+
+	[Space]
+	[HideInInspector] public int MinAsteroidCornerAmount;
+
+	[Space]
+	[HideInInspector] public int MaxAsteroidCornerAmount;
+
+
 
 	[Space]
 	[HideInInspector] public float MinSpawnSize;
@@ -33,6 +47,7 @@ public class AsteroidSpawningValues : ScriptableObject
 
 	private void OnValidate()
 	{
+		if (MaxSpawningDistance < MinSpawningDistance) MaxSpawningDistance = MinSpawningDistance;
 		if (MaxSpawnSize < MinSpawnSize) MaxSpawnSize = MinSpawnSize;
 		if (MaxFlightSpeed < MinFlightSpeed) MaxFlightSpeed = MinFlightSpeed;
 	}
@@ -45,8 +60,12 @@ public class AsteroidSpawningEditor : Editor
 {
 	SerializedObject so;
 
+	SerializedProperty propMinSpawnDistance;
+	SerializedProperty propMaxSpawnDistance;
+
 	SerializedProperty propMinSpawnSize;
 	SerializedProperty propMaxSpawnSize;
+
 	SerializedProperty propMinFlightSpeed;
 	SerializedProperty propMaxFlightSpeed;
 
@@ -54,8 +73,12 @@ public class AsteroidSpawningEditor : Editor
 	{
 		so = serializedObject;
 
+		propMinSpawnDistance = so.FindProperty("MinSpawningDistance");
+		propMaxSpawnDistance = so.FindProperty("MaxSpawningDistance");
+
 		propMinSpawnSize = so.FindProperty("MinSpawnSize");
 		propMaxSpawnSize = so.FindProperty("MaxSpawnSize");
+
 		propMinFlightSpeed = so.FindProperty("MinFlightSpeed");
 		propMaxFlightSpeed = so.FindProperty("MaxFlightSpeed");
 	}
@@ -65,6 +88,12 @@ public class AsteroidSpawningEditor : Editor
 		base.OnInspectorGUI();
 
 		so.Update();
+
+		using (new EditorGUILayout.HorizontalScope())
+		{
+			EditorGUILayout.PropertyField(propMinSpawnDistance);
+			EditorGUILayout.PropertyField(propMaxSpawnDistance);
+		}
 
 		using (new EditorGUILayout.HorizontalScope())
 		{

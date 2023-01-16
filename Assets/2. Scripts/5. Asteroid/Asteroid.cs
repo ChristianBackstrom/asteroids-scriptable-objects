@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-	private const float Randomness = .5f;
+
+	[SerializeField] private GameObject _asteroidShard;
 
 	public void AddForce(float speed)
 	{
@@ -38,6 +39,8 @@ public class Asteroid : MonoBehaviour
 		Mesh mesh = GenerateMesh(vertices.ToArray());
 
 		this.gameObject.GetComponent<MeshFilter>().mesh = mesh;
+
+
 
 		PolygonCollider2D polygonCollider2D = this.gameObject.AddComponent<PolygonCollider2D>();
 
@@ -76,5 +79,75 @@ public class Asteroid : MonoBehaviour
 		mesh.triangles = triangles.ToArray();
 
 		return mesh;
+	}
+
+
+
+
+	public void Split()
+	{
+		Vector3[] vertices = GetComponent<MeshFilter>().mesh.vertices;
+
+
+		Vector3[] splitVertices = new Vector3[3];
+
+		splitVertices[0] = vertices[0];
+		splitVertices[1] = vertices[1];
+		splitVertices[2] = vertices[vertices.Length - 1];
+
+		GenerateSplitMesh(splitVertices);
+
+		for (int i = 1; i < vertices.Length; i++)
+		{
+			splitVertices[0] = vertices[0];
+			splitVertices[1] = vertices[i];
+			splitVertices[2] = vertices[i - 1];
+
+			GenerateSplitMesh(splitVertices);
+		}
+
+	}
+
+
+	private void GenerateRandomSplitMesh(Vector3[] vertices)
+	{
+
+	}
+
+	private void GenerateSplitMesh(Vector3[] vertices)
+	{
+		Mesh mesh = new Mesh();
+
+		int[] triangle = new int[3] { 0, 1, 2 };
+
+		mesh.vertices = vertices;
+		mesh.triangles = triangle;
+
+		GameObject splitPiece = Instantiate(_asteroidShard, this.transform.position, this.transform.rotation);
+
+		splitPiece.transform.localScale = this.transform.localScale;
+
+		splitPiece.GetComponent<MeshFilter>().mesh = mesh;
+		splitPiece.GetComponent<MeshRenderer>().sharedMaterial = this.GetComponent<MeshRenderer>().sharedMaterial;
+
+		Vector2 averageVertex = GetAverageVertex(vertices);
+
+		Rigidbody2D rb = splitPiece.GetComponent<Rigidbody2D>();
+		rb.AddForce(averageVertex * 8, ForceMode2D.Impulse);
+		splitPiece.GetComponent<AsteroidShard>().StartCountdownToMinimize(200, .3f);
+	}
+
+	private Vector2 GetAverageVertex(Vector3[] vertices)
+	{
+		Vector2 average = Vector2.zero;
+
+		for (int i = 0; i < vertices.Length; i++)
+		{
+			average += (Vector2)(this.transform.rotation * vertices[i]);
+		}
+
+		average /= vertices.Length;
+
+		return average;
 	}
 }

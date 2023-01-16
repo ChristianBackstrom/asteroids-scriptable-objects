@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
 	{
 		if (other.CompareTag(AsteroidTag))
 		{
+			other.GetComponent<Asteroid>().Split();
 			Destroy(other.gameObject);
 			Destroy(this.gameObject);
 		}
