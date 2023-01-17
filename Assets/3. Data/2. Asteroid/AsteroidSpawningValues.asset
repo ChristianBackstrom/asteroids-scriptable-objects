@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: AsteroidSpawningValues
   m_EditorClassIdentifier: 
   TimeBetweenSpawn: 0.5
-  SpawningDistance: 15.2
+  AsteroidCornerRandomness: 0.3
+  AsteroidFlightTarget: {x: 20, y: 6}
+  MinSpawningDistance: 16.7
+  MaxSpawningDistance: 31.28
   MinAsteroidCornerAmount: 5
   MaxAsteroidCornerAmount: 10
-  AsteroidCornerRandomness: 0.3
   MinSpawnSize: 0.7
   MaxSpawnSize: 2
   MinFlightSpeed: 1.2
-  MaxFlightSpeed: 2
+  MaxFlightSpeed: 4

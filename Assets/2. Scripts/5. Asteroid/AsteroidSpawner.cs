@@ -55,7 +55,7 @@ public class AsteroidSpawner : MonoBehaviour
 
 		asteroid.GenerateAsteroid(speed, asteroidCorners, _spawningValues.AsteroidCornerRandomness);
 
-		asteroid.AddForce(speed);
+		asteroid.AddForce(speed, _spawningValues.AsteroidFlightTarget);
 	}
 
 
@@ -66,5 +66,8 @@ public class AsteroidSpawner : MonoBehaviour
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere(Vector3.zero, _spawningValues.MaxSpawningDistance);
 		Gizmos.DrawWireSphere(Vector3.zero, _spawningValues.MinSpawningDistance);
+
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireCube(Vector3.zero, _spawningValues.AsteroidFlightTarget);
 	}
 }

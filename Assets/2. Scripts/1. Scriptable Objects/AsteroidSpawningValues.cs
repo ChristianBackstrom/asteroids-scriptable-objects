@@ -12,6 +12,9 @@ public class AsteroidSpawningValues : ScriptableObject
 
 	public float AsteroidCornerRandomness;
 
+	[Space(20)]
+	public Vector2 AsteroidFlightTarget;
+
 
 	[Space(20)]
 	[HideInInspector] public float MinSpawningDistance;

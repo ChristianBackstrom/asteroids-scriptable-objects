@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Asteroid : MonoBehaviour
 {
 
 	[SerializeField] private GameObject _asteroidShard;
 
-	public void AddForce(float speed)
+
+	public void AddForce(float speed, Vector2 target)
 	{
 		Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
 
-		Vector2 direction = -this.transform.position;
+		Vector2 direction = new Vector2(Random.Range(-target.x, target.x), Random.Range(-target.y, target.y)) - (Vector2)this.transform.position;
 
 		rb.AddForce(direction * speed);
 	}
