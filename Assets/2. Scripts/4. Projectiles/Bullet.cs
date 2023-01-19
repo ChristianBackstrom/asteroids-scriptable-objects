@@ -18,6 +18,11 @@ public class Bullet : MonoBehaviour
 		if (other.CompareTag(AsteroidTag))
 		{
 			other.GetComponent<Asteroid>().Split();
+
+			AsteroidManager.Instance.AsteroidsDestroyed++;
+			AsteroidManager.Asteroids.Remove(other.GetComponent<Asteroid>());
+
+
 			Destroy(other.gameObject);
 			Destroy(this.gameObject);
 		}

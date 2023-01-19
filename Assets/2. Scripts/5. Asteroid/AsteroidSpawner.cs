@@ -1,21 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-	[SerializeField] private AsteroidSpawningValues _spawningValues;
+	private AsteroidSpawningValues _spawningValues;
 
 	[SerializeField] private Asteroid _asteroidPrefab;
 
 	private float timer = 0;
 	private Vector2 LastPosition = Vector2.zero;
 
+	private float _TimeBetweenSpawn;
+	public float SpawnTimeMultiplier = 1;
+
+	private void Awake()
+	{
+		_spawningValues = AsteroidManager.Instance.AsteroidSpawningValues;
+		_TimeBetweenSpawn = _spawningValues.OriginalTimeBetweenSpawn;
+	}
+
 	private void Update()
 	{
 		timer += Time.deltaTime;
-		if (timer < _spawningValues.TimeBetweenSpawn) return;
+		if (timer < _TimeBetweenSpawn / SpawnTimeMultiplier) return;
 
 		timer = 0;
 
@@ -56,6 +63,8 @@ public class AsteroidSpawner : MonoBehaviour
 		asteroid.GenerateAsteroid(speed, asteroidCorners, _spawningValues.AsteroidCornerRandomness);
 
 		asteroid.AddForce(speed, _spawningValues.AsteroidFlightTarget);
+
+		AsteroidManager.Asteroids.Add(asteroid);
 	}
 
 

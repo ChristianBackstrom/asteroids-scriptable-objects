@@ -1,26 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Health : MonoBehaviour
 {
 	[SerializeField] private Ship _ship;
+	[SerializeField] private TMP_Text _text;
 
-	[SerializeField] private int _health;
+	private int _health;
 
-	private bool _isAlive;
+
 
 	private void Awake()
 	{
 		_health = _ship.MaxHealth;
+		_text.text = $"{_health}/{_ship.MaxHealth}";
 	}
 
-
-	private void OnCollisionEnter2D(Collision2D other)
+	public void Hit()
 	{
-		if (other.gameObject.CompareTag("Asteroid"))
+		_health--;
+		_text.text = $"{_health}/{_ship.MaxHealth}";
+
+
+
+		if (_health <= 0)
 		{
-			_health--;
+			FindObjectOfType<GameOver>(true).gameObject.SetActive(true);
 		}
 	}
 }

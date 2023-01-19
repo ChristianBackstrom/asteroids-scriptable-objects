@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 549ed9b72ac2d9848adbf84c88302718, type: 3}
-  m_Name: Ship
+  m_Name: ShipData
   m_EditorClassIdentifier: 
-  MaxHealth: 5
-  RotationSpeed: 220
+  MaxHealth: 24
+  RotationSpeed: 514.09
   ThrustSpeed: 2
   ShootCooldown: 0.091
   BulletSpeed: 15

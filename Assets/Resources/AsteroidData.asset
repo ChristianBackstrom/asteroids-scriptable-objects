@@ -10,12 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4aecc488af53b534bade7573c4a9ac3e, type: 3}
-  m_Name: AsteroidSpawningValues
+  m_Name: AsteroidData
   m_EditorClassIdentifier: 
-  TimeBetweenSpawn: 0.5
+  OriginalTimeBetweenSpawn: 0.17
+  SpawningBreakpoints:
+  - AmountToNext: 10
+    SpawnValue: 10
+  - AmountToNext: 10
+    SpawnValue: 200
+  - AmountToNext: 20
+    SpawnValue: 5
   AsteroidCornerRandomness: 0.3
   AsteroidFlightTarget: {x: 20, y: 6}
-  MinSpawningDistance: 16.7
+  MinSpawningDistance: 17.05
   MaxSpawningDistance: 31.28
   MinAsteroidCornerAmount: 5
   MaxAsteroidCornerAmount: 10

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -5,7 +6,11 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "AsteroidSpawningValues", menuName = "Asteroird-Destroyer/AsteroidSpawningValues", order = 0)]
 public class AsteroidSpawningValues : ScriptableObject
 {
-	public float TimeBetweenSpawn;
+	public float OriginalTimeBetweenSpawn;
+
+	[Space]
+
+	public SpawningBreakpoint[] SpawningBreakpoints;
 
 
 	[Space(20)]
@@ -47,12 +52,16 @@ public class AsteroidSpawningValues : ScriptableObject
 	[HideInInspector] public float MaxFlightSpeed;
 
 
-
 	private void OnValidate()
 	{
 		if (MaxSpawningDistance < MinSpawningDistance) MaxSpawningDistance = MinSpawningDistance;
 		if (MaxSpawnSize < MinSpawnSize) MaxSpawnSize = MinSpawnSize;
 		if (MaxFlightSpeed < MinFlightSpeed) MaxFlightSpeed = MinFlightSpeed;
+
+		for (int i = 0; i < SpawningBreakpoints.Length; i++)
+		{
+			if (SpawningBreakpoints[i].SpawnValue < 0) SpawningBreakpoints[i].SpawnValue = 0;
+		}
 	}
 }
 

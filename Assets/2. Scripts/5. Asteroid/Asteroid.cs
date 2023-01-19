@@ -110,12 +110,6 @@ public class Asteroid : MonoBehaviour
 
 	}
 
-
-	private void GenerateRandomSplitMesh(Vector3[] vertices)
-	{
-
-	}
-
 	private void GenerateSplitMesh(Vector3[] vertices)
 	{
 		Mesh mesh = new Mesh();
@@ -151,5 +145,13 @@ public class Asteroid : MonoBehaviour
 		average /= vertices.Length;
 
 		return average;
+	}
+
+	private void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.CompareTag("Player"))
+		{
+			other.gameObject.GetComponent<Health>().Hit();
+		}
 	}
 }
